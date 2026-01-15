@@ -367,6 +367,12 @@ p {
     display: flex;
     align-items: center;
     gap: 0.75rem;
+    cursor: pointer;
+    transition: opacity var(--transition-fast);
+}
+
+.logo-top-bar:active {
+    opacity: 0.7;
 }
 
 .logo-text {

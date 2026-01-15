@@ -93,7 +93,7 @@
     <div id="dashboardScreen" class="screen">
         <div class="top-bar">
             <div class="top-bar-content">
-                <div class="logo-top-bar">
+                <div class="logo-top-bar" onclick="app.showDashboard()">
                     <svg width="32" height="32" viewBox="0 0 60 60" fill="none">
                         <path
                             d="M30 5C16.2 5 5 16.2 5 30s11.2 25 25 25 25-11.2 25-25S43.8 5 30 5zm0 45c-11 0-20-9-20-20s9-20 20-20 20 9 20 20-9 20-20 20z"
@@ -180,12 +180,14 @@
                 </div>
             </div>
 
-            <footer class="app-footer">
-                <p>&copy; 2026 Redeat Kebede. All rights reserved.</p>
-                <p class="footer-contact-note">For troubleshooting or features:</p>
-                <a href="mailto:rkebede@eagles.bridgewater.edu" class="footer-link">rkebede@eagles.bridgewater.edu</a>
-            </footer>
         </div>
+
+        <footer class="app-footer">
+            <p>&copy; 2026 Redeat Kebede. All rights reserved.</p>
+            <p class="footer-contact-note">For troubleshooting or features:</p>
+            <a href="#" onclick="app.showEmailChoice('rkebede@eagles.bridgewater.edu'); return false;"
+                class="footer-link">rkebede@eagles.bridgewater.edu</a>
+        </footer>
 
         <nav class="bottom-nav">
             <button class="nav-btn active" onclick="app.showDashboard()">
@@ -231,6 +233,13 @@
         <div class="category-content" id="categoryContent">
             <!-- Dynamic content will be injected here -->
         </div>
+
+        <footer class="app-footer">
+            <p>&copy; 2026 Redeat Kebede. All rights reserved.</p>
+            <p class="footer-contact-note">For troubleshooting or features:</p>
+            <a href="#" onclick="app.showEmailChoice('rkebede@eagles.bridgewater.edu'); return false;"
+                class="footer-link">rkebede@eagles.bridgewater.edu</a>
+        </footer>
     </div>
 
     <!-- User Guide Screen -->
@@ -346,6 +355,13 @@
 
                 </div>
             </div>
+
+            <footer class="app-footer">
+                <p>&copy; 2026 Redeat Kebede. All rights reserved.</p>
+                <p class="footer-contact-note">For troubleshooting or features:</p>
+                <a href="#" onclick="app.showEmailChoice('rkebede@eagles.bridgewater.edu'); return false;"
+                    class="footer-link">rkebede@eagles.bridgewater.edu</a>
+            </footer>
         </div>
     </div>
 
@@ -362,6 +378,37 @@
             </div>
             <div class="modal-body" id="modalBody">
                 <!-- Form will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Email Choice Modal -->
+    <div id="emailModal" class="modal">
+        <div class="modal-content" style="max-width: 400px; text-align: center;">
+            <div class="modal-header">
+                <h3>Contact Support</h3>
+                <button class="btn-icon" onclick="app.closeEmailModal()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div style="padding: var(--spacing-sm);">
+                <p style="color: var(--text-secondary); margin-bottom: var(--spacing-md);">How would you like to send
+                    this email?</p>
+                <div style="display: flex; flex-direction: column; gap: var(--spacing-sm);">
+                    <a id="emailGmail" href="#" target="_blank" class="btn-primary"
+                        style="text-decoration: none; background: #DB4437;">
+                        Open in Gmail
+                    </a>
+                    <a id="emailOutlook" href="#" target="_blank" class="btn-primary"
+                        style="text-decoration: none; background: #0078D4;">
+                        Open in Outlook
+                    </a>
+                    <a id="emailDefault" href="#" class="btn-ghost" style="border: 1px solid rgba(255,255,255,0.1);">
+                        Open in Default App
+                    </a>
+                </div>
             </div>
         </div>
     </div>

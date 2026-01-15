@@ -9,7 +9,32 @@ const app = {
         appointments: []
     },
 
-    // Initialize the app
+    // Email Choice
+    showEmailChoice(email) {
+        const modal = document.getElementById('emailModal');
+
+        // Configure links
+        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}`;
+        const outlookUrl = `https://outlook.office.com/mail/deeplink/compose?to=${email}`;
+        const defaultUrl = `mailto:${email}`;
+
+        document.getElementById('emailGmail').href = gmailUrl;
+        document.getElementById('emailOutlook').href = outlookUrl;
+        document.getElementById('emailDefault').href = defaultUrl;
+        document.getElementById('emailDefault').onclick = () => this.closeEmailModal();
+
+        // Close modal when clicking other options too? usually they open in new tab so we can close modal
+        document.getElementById('emailGmail').onclick = () => this.closeEmailModal();
+        document.getElementById('emailOutlook').onclick = () => this.closeEmailModal();
+
+        modal.classList.add('active');
+    },
+
+    closeEmailModal() {
+        document.getElementById('emailModal').classList.remove('active');
+    },
+
+    // Initialize the health form when modal opens
     init() {
         this.loadData();
         this.updateDate();
@@ -715,6 +740,15 @@ const app = {
                 <div class="setting-item" onclick="app.showGuide()">
                     <h4>User Guide</h4>
                     <p>Learn how to use all features</p>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3>Support</h3>
+                <div class="setting-item" onclick="app.showEmailChoice('rkebede@eagles.bridgewater.edu')">
+                    <h4>Contact Support</h4>
+                    <p>rkebede@eagles.bridgewater.edu</p>
+                    <p style="font-size: 0.8rem; margin-top: 0.25rem; color: var(--color-primary);">Tap to email for features or help</p>
                 </div>
             </div>
         `;
