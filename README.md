@@ -226,4 +226,4 @@ This project is open source and available for personal use.
 
 
 
-Start tracking your life today! 🎯
+Start tracking your life today!
