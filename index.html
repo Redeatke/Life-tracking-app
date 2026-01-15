@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="Comprehensive life tracker for health, diet, schedules, and appointments">
+    <meta name="theme-color" content="#6366f1">
+    <title>LifeTracker - Your Personal Health & Life Dashboard</title>
+
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="LifeTracker">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Welcome Screen -->
+    <div id="welcomeScreen" class="screen active">
+        <div class="welcome-content">
+            <div class="logo-container">
+                <div class="logo-circle">
+                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                        <path
+                            d="M30 5C16.2 5 5 16.2 5 30s11.2 25 25 25 25-11.2 25-25S43.8 5 30 5zm0 45c-11 0-20-9-20-20s9-20 20-20 20 9 20 20-9 20-20 20z"
+                            fill="url(#gradient1)" />
+                        <circle cx="30" cy="30" r="15" fill="url(#gradient2)" opacity="0.6" />
+                        <defs>
+                            <linearGradient id="gradient1" x1="5" y1="5" x2="55" y2="55">
+                                <stop offset="0%" stop-color="#6366f1" />
+                                <stop offset="100%" stop-color="#8b5cf6" />
+                            </linearGradient>
+                            <linearGradient id="gradient2" x1="15" y1="15" x2="45" y2="45">
+                                <stop offset="0%" stop-color="#8b5cf6" />
+                                <stop offset="100%" stop-color="#ec4899" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <h1 class="app-title">LifeTracker</h1>
+                <p class="app-tagline">Your Personal Health & Life Dashboard</p>
+            </div>
+
+            <div class="feature-cards">
+                <div class="feature-card">
+                    <div class="feature-icon">💪</div>
+                    <h3>Health</h3>
+                    <p>Track fitness, weight & wellness</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🥗</div>
+                    <h3>Diet</h3>
+                    <p>Log meals & nutrition</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📅</div>
+                    <h3>Schedule</h3>
+                    <p>Manage your calendar</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🩺</div>
+                    <h3>Appointments</h3>
+                    <p>Never miss important dates</p>
+                </div>
+            </div>
+
+            <button class="btn-primary btn-large" onclick="app.showDashboard()">
+                Get Started
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path
+                        d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" />
+                </svg>
+            </button>
+
+            <button class="btn-ghost" onclick="app.showGuide()">
+                📖 View User Guide
+            </button>
+        </div>
+    </div>
+
+    <!-- Dashboard Screen -->
+    <div id="dashboardScreen" class="screen">
+        <div class="top-bar">
+            <div class="top-bar-content">
+                <div class="logo-top-bar">
+                    <svg width="32" height="32" viewBox="0 0 60 60" fill="none">
+                        <path
+                            d="M30 5C16.2 5 5 16.2 5 30s11.2 25 25 25 25-11.2 25-25S43.8 5 30 5zm0 45c-11 0-20-9-20-20s9-20 20-20 20 9 20 20-9 20-20 20z"
+                            fill="url(#gradient1)" />
+                        <circle cx="30" cy="30" r="15" fill="url(#gradient2)" opacity="0.6" />
+                        <defs>
+                            <linearGradient id="gradient1" x1="5" y1="5" x2="55" y2="55">
+                                <stop offset="0%" stop-color="#6366f1" />
+                                <stop offset="100%" stop-color="#8b5cf6" />
+                            </linearGradient>
+                            <linearGradient id="gradient2" x1="15" y1="15" x2="45" y2="45">
+                                <stop offset="0%" stop-color="#8b5cf6" />
+                                <stop offset="100%" stop-color="#ec4899" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span class="logo-text">LifeTracker</span>
+                </div>
+                <button class="btn-icon" onclick="app.showGuide()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <circle cx="12" cy="12" r="10" stroke-width="2" />
+                        <path d="M12 16v-4M12 8h.01" stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="dashboard-content">
+            <div class="date-display">
+                <p id="currentDate"></p>
+            </div>
+
+            <div class="quick-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">💧</div>
+                    <div class="stat-content">
+                        <p class="stat-label">Water Today</p>
+                        <p class="stat-value" id="waterStat">0/8 glasses</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🔥</div>
+                    <div class="stat-content">
+                        <p class="stat-label">Calories</p>
+                        <p class="stat-value" id="caloriesStat">0 kcal</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⏰</div>
+                    <div class="stat-content">
+                        <p class="stat-label">Today's Tasks</p>
+                        <p class="stat-value" id="tasksStat">0 pending</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-grid">
+                <div class="category-card" onclick="app.showCategory('health')">
+                    <div class="category-icon">💪</div>
+                    <h3>Health</h3>
+                    <p>Fitness & Wellness</p>
+                    <div class="category-badge" id="healthBadge">0</div>
+                </div>
+
+                <div class="category-card" onclick="app.showCategory('diet')">
+                    <div class="category-icon">🥗</div>
+                    <h3>Diet</h3>
+                    <p>Meals & Nutrition</p>
+                    <div class="category-badge" id="dietBadge">0</div>
+                </div>
+
+                <div class="category-card" onclick="app.showCategory('schedule')">
+                    <div class="category-icon">📅</div>
+                    <h3>Schedule</h3>
+                    <p>Calendar & Events</p>
+                    <div class="category-badge" id="scheduleBadge">0</div>
+                </div>
+
+                <div class="category-card" onclick="app.showCategory('appointments')">
+                    <div class="category-icon">🩺</div>
+                    <h3>Appointments</h3>
+                    <p>Medical & Meetings</p>
+                    <div class="category-badge" id="appointmentsBadge">0</div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="bottom-nav">
+            <button class="nav-btn active" onclick="app.showDashboard()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z" />
+                </svg>
+                <span>Home</span>
+            </button>
+            <button class="nav-btn" onclick="app.showHistory()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M13 3a9 9 0 0 0-9 9H1l4 3.99L9 12H6a7 7 0 1 1 7 7v2a9 9 0 0 0 0-18z" />
+                </svg>
+                <span>History</span>
+            </button>
+            <button class="nav-btn" onclick="app.showSettings()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" />
+                </svg>
+                <span>Settings</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- Category Detail Screen -->
+    <div id="categoryScreen" class="screen">
+        <div class="top-bar">
+            <div class="top-bar-content">
+                <button class="btn-icon" onclick="app.showDashboard()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7" />
+                    </svg>
+                </button>
+                <h2 class="screen-title" id="categoryTitle">Category</h2>
+                <button class="btn-icon" onclick="app.showAddEntry()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 5v14M5 12h14" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="category-content" id="categoryContent">
+            <!-- Dynamic content will be injected here -->
+        </div>
+    </div>
+
+    <!-- User Guide Screen -->
+    <div id="guideScreen" class="screen">
+        <div class="top-bar">
+            <div class="top-bar-content">
+                <button class="btn-icon" onclick="app.hideGuide()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12" />
+                    </svg>
+                </button>
+                <h2 class="screen-title">User Guide</h2>
+                <div style="width: 40px;"></div>
+            </div>
+        </div>
+
+        <div class="guide-content">
+            <div class="guide-section">
+                <h2>Getting Started</h2>
+                <ol>
+                    <li>
+                        <strong>Access the Dashboard</strong>
+                        <p>Click "Get Started" from the welcome screen or use the Home button in the bottom navigation
+                            to view your dashboard with quick stats and category cards.</p>
+                    </li>
+                    <li>
+                        <strong>Navigate the Dashboard</strong>
+                        <p>The home screen shows your quick stats and category cards. Tap any category to view details.
+                        </p>
+                    </li>
+                    <li>
+                        <strong>Add Entries</strong>
+                        <p>Inside each category, tap the + button to add new entries.</p>
+                    </li>
+                </ol>
+            </div>
+
+            <div class="guide-section">
+                <h2>Health Tracker</h2>
+                <p class="guide-intro">Track your fitness journey and overall wellness</p>
+                <ul>
+                    <li><strong>Weight:</strong> Log your weight daily to track trends</li>
+                    <li><strong>Exercise:</strong> Record workouts with duration and type</li>
+                    <li><strong>Water Intake:</strong> Track glasses of water (goal: 8/day)</li>
+                    <li><strong>Sleep:</strong> Monitor sleep hours for better rest</li>
+                </ul>
+                <div class="guide-tip">
+                    💡 <strong>Tip:</strong> Consistency is key! Try to log daily for best results.
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <h2>Diet Tracker</h2>
+                <p class="guide-intro">Monitor your nutrition and eating habits</p>
+                <ul>
+                    <li><strong>Meals:</strong> Log breakfast, lunch, dinner, and snacks</li>
+                    <li><strong>Calories:</strong> Track caloric intake per meal</li>
+                    <li><strong>Macros:</strong> Record protein, carbs, and fats</li>
+                    <li><strong>Notes:</strong> Add details about ingredients or feelings</li>
+                </ul>
+                <div class="guide-tip">
+                    💡 <strong>Tip:</strong> Take photos of meals for visual tracking!
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <h2>Schedule Manager</h2>
+                <p class="guide-intro">Organize your daily tasks and events</p>
+                <ul>
+                    <li><strong>Tasks:</strong> Create to-do items with priorities</li>
+                    <li><strong>Events:</strong> Schedule activities with time slots</li>
+                    <li><strong>Reminders:</strong> Set notifications for important items</li>
+                    <li><strong>Categories:</strong> Tag items as work, personal, etc.</li>
+                </ul>
+                <div class="guide-tip">
+                    💡 <strong>Tip:</strong> Review your schedule each morning to stay organized!
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <h2>Appointments</h2>
+                <p class="guide-intro">Never miss important meetings and checkups</p>
+                <ul>
+                    <li><strong>Medical:</strong> Doctor visits, checkups, prescriptions</li>
+                    <li><strong>Professional:</strong> Work meetings, consultations</li>
+                    <li><strong>Personal:</strong> Haircuts, vet visits, etc.</li>
+                    <li><strong>Notifications:</strong> Get reminded before appointments</li>
+                </ul>
+                <div class="guide-tip">
+                    💡 <strong>Tip:</strong> Add location and doctor notes for medical appointments!
+                </div>
+            </div>
+
+
+
+
+
+            <div class="guide-section">
+                <h2>Pro Tips</h2>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <span class="tip-emoji">⏰</span>
+                        <p>Set reminders to log entries at the same time daily</p>
+                    </div>
+                    <div class="tip-card">
+                        <span class="tip-emoji">📈</span>
+                        <p>Review your weekly trends to spot patterns</p>
+                    </div>
+                    <div class="tip-card">
+                        <span class="tip-emoji">🎨</span>
+                        <p>Use different categories to organize your life</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Adding Entries -->
+    <div id="addEntryModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Add Entry</h3>
+                <button class="btn-icon" onclick="app.closeModal()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Form will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
